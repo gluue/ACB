@@ -76,6 +76,19 @@ public class MainActivity extends AppCompatActivity {
         fragmentManager = getFragmentManager();
         prefs = MainActivity.this.getPreferences(Context.MODE_PRIVATE);
 
+        User u1 = new User();
+        u1.setUserName("admin");
+        u1.setUserPassword("root");
+        u1.setUserAvater(getResources().getDrawable(R.drawable.avatar_default));
+
+        User u2 = new User();
+        u2.setUserAvater(getResources().getDrawable(R.drawable.avatar_default));
+        u2.setUserName("u");
+        u2.setUserPassword("p");
+
+        SuperVar.userList.add(u1);
+        SuperVar.userList.add(u2);
+
         final BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigationMain);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
@@ -206,7 +219,7 @@ public class MainActivity extends AppCompatActivity {
             }
         };
 
-        fragmentManager.beginTransaction().replace(R.id.frameLayoutMain, new ProductFragment()).commit();
+        fragmentManager.beginTransaction().replace(R.id.frameLayoutMain, new LogInFragment()).commit();
 
         final FrameLayout mainFrameLayout = (FrameLayout)findViewById(R.id.frameLayoutMain);
         mainFrameLayout.setOnTouchListener(swipeTouchListener);

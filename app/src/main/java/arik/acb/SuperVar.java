@@ -27,4 +27,5 @@ public class SuperVar extends Application {
     static BottomNavigationView mainNavigationView;
     static boolean requestMap = false;
     static List<Dispensary> dispensaryList = new ArrayList<>();
+    static List<User> userList = new ArrayList<>();
 }
