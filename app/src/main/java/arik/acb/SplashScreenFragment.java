@@ -29,6 +29,7 @@ public class SplashScreenFragment extends Fragment {
                 flag = true;
             }
         }
+        //ADDED THIS SHIT
 
         FragmentTransaction transaction = getFragmentManager().beginTransaction();
         transaction.setCustomAnimations(R.animator.fade_in, R.animator.fade_out);
