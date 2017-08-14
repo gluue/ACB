@@ -83,6 +83,7 @@ public class DispensaryFragment extends Fragment implements OnMapReadyCallback {
             if(searchLayout.getVisibility()==View.VISIBLE){
                 searchLayout.setVisibility(View.GONE);
             }
+
             dispensaryNavigationView.getMenu().getItem(1).setChecked(true);
             SuperVar.pageID = "dispensaryMap";
         }
