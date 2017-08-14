@@ -20,6 +20,7 @@ public class SplashScreenFragment extends Fragment {
 
         //DO STUFF....
 
+        //YEAH
         boolean flag = false;
 
         long startTime = System.currentTimeMillis();
