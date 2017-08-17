@@ -15,11 +15,5 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
-    <style name="potRatingBar" parent="@android:style/Widget.RatingBar">
-        <item name="android:progressDrawable">@drawable/pot_rating_bar_full</item>
-        <item name="android:minHeight">50dp</item>
-        <item name="android:maxHeight">50dp</item>
-    </style>
-
 
 </resources>

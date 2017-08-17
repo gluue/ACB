@@ -11,12 +11,18 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.DisplayMetrics;
+import android.view.GestureDetector;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ListView;
+import android.widget.Toast;
 
+import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -31,6 +37,7 @@ public class ProductFragment extends Fragment {
     BottomNavigationView productNavigationView;
     List<Product> list;
     Context context;
+    int REL_SWIPE_MIN_DISTANCE, REL_SWIPE_MAX_OFF_PATH, REL_SWIPE_THRESHOLD_VELOCITY;
 
     @Nullable
     @Override
@@ -41,6 +48,11 @@ public class ProductFragment extends Fragment {
         SuperVar.pageID = "productList";
         list = new ArrayList<>();
         SuperVar.mainNavigationView.getMenu().getItem(0).setChecked(true);
+
+        DisplayMetrics dm = getResources().getDisplayMetrics();
+        REL_SWIPE_MIN_DISTANCE = (int)(120.0f * dm.densityDpi / 160.0f + 0.5);
+        REL_SWIPE_MAX_OFF_PATH = (int)(250.0f * dm.densityDpi / 160.0f + 0.5);
+        REL_SWIPE_THRESHOLD_VELOCITY = (int)(200.0f * dm.densityDpi / 160.0f + 0.5);
 
         for(Dispensary d : SuperVar.dispensaryList){
             for(int i = 0; i < d.getProductList().size(); i++){
@@ -65,6 +77,8 @@ public class ProductFragment extends Fragment {
 
         recyclerView = (RecyclerView)rootView.findViewById(R.id.rvProductList);
         recyclerView.setLayoutManager(new LinearLayoutManager(rootView.getContext()));
+        //Aight what the fuck
+        // /recyclerView.addOnItemTouchListener(new MyGestureDetector());
         recyclerView.setAdapter(new ProductListAdapter(rootView.getContext(), list, getFragmentManager()));
 
         return rootView;
@@ -96,4 +110,44 @@ public class ProductFragment extends Fragment {
         }
 
     };
+
+    class MyGestureDetector extends GestureDetector.SimpleOnGestureListener {
+
+        // Detect a single-click and call my own handler.
+        @Override
+        public boolean onSingleTapUp(MotionEvent e) {
+            RecyclerView rv = recyclerView;
+            int pos = rv.findChildViewUnder(e.getX(), e.getY()).getId();
+            myOnItemClick(pos);
+            return false;
+        }
+
+        @Override
+        public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
+            if (Math.abs(e1.getY() - e2.getY()) > REL_SWIPE_MAX_OFF_PATH)
+                return false;
+            if(e1.getX() - e2.getX() > REL_SWIPE_MIN_DISTANCE &&
+                    Math.abs(velocityX) > REL_SWIPE_THRESHOLD_VELOCITY) {
+                onRTLFling();
+            }  else if (e2.getX() - e1.getX() > REL_SWIPE_MIN_DISTANCE &&
+                    Math.abs(velocityX) > REL_SWIPE_THRESHOLD_VELOCITY) {
+                onLTRFling();
+            }
+            return false;
+        }
+
+    }
+
+    private void myOnItemClick(int position) {
+        String str = MessageFormat.format("Item clicked = {0,number}", position);
+        Toast.makeText(getActivity().getApplicationContext(), str, Toast.LENGTH_SHORT).show();
+    }
+
+    private void onLTRFling() {
+        Toast.makeText(getActivity().getApplicationContext(), "Left-to-right fling", Toast.LENGTH_SHORT).show();
+    }
+
+    private void onRTLFling() {
+        Toast.makeText(getActivity().getApplicationContext(), "Right-to-left fling", Toast.LENGTH_SHORT).show();
+    }
 }

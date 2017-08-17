@@ -47,6 +47,12 @@ public class SplashScreenFragment extends Fragment {
         protected String doInBackground(String... params) {
 
             //LOAD CURRENT WHEREABOUTS
+
+            return "executed";
+        }
+
+        @Override
+        protected void onPreExecute() {
             locationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
             try{
                 locationManager.requestSingleUpdate(LocationManager.GPS_PROVIDER, new LocationListenerGPS(), null);
@@ -54,13 +60,6 @@ public class SplashScreenFragment extends Fragment {
             }catch (SecurityException sec){
                 sec.printStackTrace();
             }
-
-
-            return "executed";
-        }
-
-        @Override
-        protected void onPreExecute() {
 
         }
 

@@ -167,8 +167,19 @@ public class DispensaryFragment extends Fragment implements OnMapReadyCallback {
             System.out.println("SECURITY EXCEPTION");
         }
 
-        gmap.moveCamera(CameraUpdateFactory.newLatLng(SuperVar.currentUser.getLocation()));  //CATCH A NULL POINTER HERE. LOCATION LISTENER FAILURE
-        gmap.animateCamera(CameraUpdateFactory.zoomTo(11));
+        if(SuperVar.currentUser.getLocation()!=null){
+            gmap.moveCamera(CameraUpdateFactory.newLatLng(SuperVar.currentUser.getLocation()));  //CATCH A NULL POINTER HERE. LOCATION LISTENER FAILURE
+            gmap.animateCamera(CameraUpdateFactory.zoomTo(11));
+        }else{
+
+            try{
+                gmap.setMyLocationEnabled(true);
+            }catch (SecurityException sec){
+                sec.printStackTrace();
+            }
+
+        }
+
     }
 
 
