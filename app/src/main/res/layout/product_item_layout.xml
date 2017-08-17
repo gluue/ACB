@@ -48,9 +48,10 @@
         android:layout_below="@id/textViewProductItemDispensary"/>
 
     <RatingBar
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/ratingBarProductItem"
+        style="@style/potRatingBar"
         android:focusable="false"
         android:clickable="false"
         android:numStars="5"
