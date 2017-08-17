@@ -39,6 +39,8 @@ public class LogInFragment extends Fragment{
                 for(User u : SuperVar.userList){
                     if(userField.getText().toString().equals(u.getUserName())){
                         if(passField.getText().toString().equals(u.getUserPassword())){
+                            u.setUserAvater(getResources().getDrawable(R.drawable.avatar_default));
+                            SuperVar.currentUser = u;
                             getFragmentManager().beginTransaction().replace(R.id.frameLayoutMain, new SplashScreenFragment()).commit();
                         }else{
                             Toast.makeText(getActivity().getApplicationContext(), "Incorecct Username/Password", Toast.LENGTH_LONG).show();

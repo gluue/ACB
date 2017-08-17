@@ -123,9 +123,6 @@ public class DispensaryFragment extends Fragment implements OnMapReadyCallback {
                     mapFragment = SupportMapFragment.newInstance();
                     mapFragment.onCreate(savedInstance);
                     mapFragment.getMapAsync(DispensaryFragment.this);
-                    //mapAroundUser();
-
-                    //SuperVar.dispensaryMap = mapFragment;
 
                     SuperVar.supportFragmentManager.beginTransaction().replace(R.id.frameLayoutDispensaryMap, mapFragment).commit();
 
@@ -147,7 +144,6 @@ public class DispensaryFragment extends Fragment implements OnMapReadyCallback {
     public void onMapReady(GoogleMap map)
     {
         try{
-            gmap = map;
             if(!SuperVar.requestMap){
                 for(Dispensary disp : SuperVar.dispensaryList){
                     if(disp.getLatitude()!=0||disp.getLongitude()!=0){
@@ -165,45 +161,16 @@ public class DispensaryFragment extends Fragment implements OnMapReadyCallback {
                         .title(SuperVar.targetDispensary.getDispensaryName()));
             }
 
+            gmap = map;
+
         }catch (SecurityException sec){
             System.out.println("SECURITY EXCEPTION");
         }
+
+        gmap.moveCamera(CameraUpdateFactory.newLatLng(SuperVar.currentUser.getLocation()));  //CATCH A NULL POINTER HERE. LOCATION LISTENER FAILURE
+        gmap.animateCamera(CameraUpdateFactory.zoomTo(11));
     }
 
-    public class LocationListenerGPS implements LocationListener {
-        @Override
-        public void onLocationChanged(Location location) {
-            LatLng current = new LatLng(location.getLatitude(), location.getLongitude());
-            CameraPosition cameraPosition = new CameraPosition.Builder().target(current).zoom(15).bearing(0).tilt(45).build();
-            gmap.moveCamera(CameraUpdateFactory.newLatLng(current));  //CATCH A NULL POINTER HERE. LOCATION LISTENER FAILURE
-            gmap.animateCamera(CameraUpdateFactory.zoomTo(11));
-        }
-
-        @Override
-        public void onStatusChanged(String provider, int status, Bundle extras) {
-
-        }
-
-        @Override
-        public void onProviderEnabled(String provider) {
-
-        }
-
-        @Override
-        public void onProviderDisabled(String provider) {
-
-        }
-    }
-
-    public void mapAroundUser(){
-        locationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
-        try{
-            locationManager.requestSingleUpdate(LocationManager.GPS_PROVIDER, new LocationListenerGPS(), null);
-
-        }catch (SecurityException sec){
-            sec.printStackTrace();
-        }
-    }
 
 
 

@@ -57,7 +57,6 @@ public class DispensaryDetailFragment extends Fragment implements OnMapReadyCall
     BottomNavigationView dispensaryProductMenu;
     SupportMapFragment mapFragment;
     GoogleMap gmap;
-    LocationManager locationManager;
     FloatingActionButton fab;
     List<Review> reviewList;
     Button manageDispensaryButton;
@@ -128,8 +127,6 @@ public class DispensaryDetailFragment extends Fragment implements OnMapReadyCall
         viewFlipper.setOutAnimation(AnimationUtils.loadAnimation(rootView.getContext(), android.R.anim.slide_out_right));
 
         viewFlipper.setAutoStart(true);
-
-        SuperVar.supportFragmentManager.beginTransaction().replace(R.id.frameLayoutViewFlipperDispensary, mapFragment).commit();
 
 
         productRecyclerView.setLayoutManager(new LinearLayoutManager(rootView.getContext()));
@@ -215,52 +212,13 @@ public class DispensaryDetailFragment extends Fragment implements OnMapReadyCall
                 gmap.animateCamera(CameraUpdateFactory.zoomTo(11));
             }
 
+            SuperVar.supportFragmentManager.beginTransaction().replace(R.id.frameLayoutViewFlipperDispensary, mapFragment).commit();
 
             //gmap.setMyLocationEnabled(true);
             //enabling location my location enabled eats up data
 
         }catch (SecurityException sec){
             System.out.println("SECURITY EXCEPTION");
-        }
-    }
-
-    public class LocationListenerGPS implements LocationListener {
-        @Override
-        public void onLocationChanged(Location location) {
-            LatLng current = new LatLng(location.getLatitude(), location.getLongitude());
-            CameraPosition cameraPosition = new CameraPosition.Builder().target(current).zoom(15).bearing(0).tilt(45).build();
-            try{
-                gmap.moveCamera(CameraUpdateFactory.newLatLng(current));  //CATCH A NULL POINTER HERE. LOCATION LISTENER FAILURE
-                gmap.animateCamera(CameraUpdateFactory.zoomTo(11));
-            }catch (NullPointerException nP){
-                nP.printStackTrace();
-            }
-
-        }
-
-        @Override
-        public void onStatusChanged(String provider, int status, Bundle extras) {
-
-        }
-
-        @Override
-        public void onProviderEnabled(String provider) {
-
-        }
-
-        @Override
-        public void onProviderDisabled(String provider) {
-
-        }
-    }
-
-    public void mapAroundUser(){
-        locationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
-        try{
-            locationManager.requestSingleUpdate(LocationManager.GPS_PROVIDER, new LocationListenerGPS(), null);
-
-        }catch (SecurityException sec){
-            sec.printStackTrace();
         }
     }
 

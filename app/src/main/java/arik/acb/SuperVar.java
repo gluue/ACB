@@ -15,6 +15,7 @@ import java.util.List;
  */
 
 public class SuperVar extends Application {
+    static User currentUser;
     static String productListType;
     static Product targetProduct;
     static ProductDetailFragment targetProductFragment;
