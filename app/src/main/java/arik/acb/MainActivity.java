@@ -219,7 +219,7 @@ public class MainActivity extends AppCompatActivity {
             }
         };
 
-        fragmentManager.beginTransaction().replace(R.id.frameLayoutMain, new LogInFragment()).commit();
+        fragmentManager.beginTransaction().replace(R.id.frameLayoutMain, new ProductFragment()).commit();
 
         final FrameLayout mainFrameLayout = (FrameLayout)findViewById(R.id.frameLayoutMain);
         mainFrameLayout.setOnTouchListener(swipeTouchListener);

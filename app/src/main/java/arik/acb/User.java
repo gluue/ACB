@@ -2,6 +2,9 @@ package arik.acb;
 
 import android.graphics.drawable.Drawable;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by Jake on 8/7/2017.
  */
@@ -9,6 +12,11 @@ import android.graphics.drawable.Drawable;
 public class User {
     String userName, userPassword;
     Drawable userAvater;
+    List<Product> productCartList;
+
+    public User(){
+        this.productCartList = new ArrayList<>();
+    }
 
     public void setUserName(String userName) {
         this.userName = userName;
@@ -32,5 +40,13 @@ public class User {
 
     public Drawable getUserAvater() {
         return userAvater;
+    }
+
+    public List<Product> getProductCartList() {
+        return productCartList;
+    }
+
+    public void addToProductList(Product p){
+        this.productCartList.add(p);
     }
 }

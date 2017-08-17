@@ -60,6 +60,7 @@ public class DispensaryDetailFragment extends Fragment implements OnMapReadyCall
     LocationManager locationManager;
     FloatingActionButton fab;
     List<Review> reviewList;
+    Button manageDispensaryButton;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
@@ -76,6 +77,7 @@ public class DispensaryDetailFragment extends Fragment implements OnMapReadyCall
         fab = (FloatingActionButton)rootView.findViewById(R.id.fabDispensary);
         reviewRecyclerlist = (RecyclerView)rootView.findViewById(R.id.recyclerViewDispensaryReview);
         productRecyclerView = (RecyclerView) rootView.findViewById(R.id.recyclerViewDispensaryProductList);
+        manageDispensaryButton = (Button) rootView.findViewById(R.id.buttonDispensaryDetailManage);
 
         productRecyclerView.setNestedScrollingEnabled(false);
         reviewRecyclerlist.setNestedScrollingEnabled(false);
@@ -150,6 +152,13 @@ public class DispensaryDetailFragment extends Fragment implements OnMapReadyCall
         };
 
         appBar.addOnOffsetChangedListener(mListener);
+
+        manageDispensaryButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getFragmentManager().beginTransaction().replace(R.id.frameLayoutMain, new ManageDispensaryFragment()).commit();
+            }
+        });
 
 
 

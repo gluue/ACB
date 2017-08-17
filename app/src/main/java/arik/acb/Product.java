@@ -12,7 +12,7 @@ import java.util.List;
 
 public class Product {
     int rating;
-    String productName, productType, dispensaryAddress, dispensaryName;
+    String productName, productType, dispensaryAddress, dispensaryName, productDescription;
     Drawable image, iconImage;
     List<Double> statList;
     Dispensary dispensary;
@@ -23,6 +23,13 @@ public class Product {
         statList = new ArrayList<>();
     }
 
+    public void setProductDescription(String productDescription) {
+        this.productDescription = productDescription;
+    }
+
+    public String getProductDescription() {
+        return productDescription;
+    }
 
     public void setDispensary(Dispensary dispensary) {
         this.dispensary = dispensary;

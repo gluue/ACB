@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,6 +24,7 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductViewHolder> 
     List<Product> productList, totalList;
     FragmentManager manager;
     Context context;
+    OnSwipeTouchListener swipeTouchListener;
 
     public ProductListAdapter(Context c, List<Product> list, FragmentManager m){
         inflater = LayoutInflater.from(c);
@@ -70,6 +72,24 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductViewHolder> 
                 transaction.replace(R.id.frameLayoutMain, SuperVar.targetProductFragment).commit();
             }
         });
+
+        swipeTouchListener = new OnSwipeTouchListener(holder.button.getContext()) {
+            @Override
+            public void onSwipeLeft() {
+                //FORWARD SWIPE
+                Toast.makeText(context, "YOU'RE SWIPING LEFT ON A PRODUCT", Toast.LENGTH_LONG).show();
+
+
+            }
+            @Override
+            public void onSwipeRight () {
+                //BACK SWIPE
+                Toast.makeText(context, "YOU'RE SWIPING RIGHT ON A PRODUCT", Toast.LENGTH_LONG).show();
+
+            }
+        };
+
+
 
     }
 
