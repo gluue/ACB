@@ -57,6 +57,7 @@ public class ProductFragment extends Fragment {
         for(Dispensary d : SuperVar.dispensaryList){
             for(int i = 0; i < d.getProductList().size(); i++){
                 list.add(d.getProductList().get(i));
+                SuperVar.productList.add(d.getProductList().get(i));
             }
         }
 

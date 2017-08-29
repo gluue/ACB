@@ -61,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
                     return true;
                 case R.id.navigation_notifications:
                     SuperVar.pageID = "notification";
-                    fragmentManager.beginTransaction().replace(R.id.frameLayoutMain, new NotificationFragment()).commit();
+                    fragmentManager.beginTransaction().replace(R.id.frameLayoutMain, new HomePageFragment()).commit();
                     return true;
             }
             return false;

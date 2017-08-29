@@ -12,10 +12,18 @@ import java.util.List;
 
 public class Dispensary {
     String dispensaryName, dispensaryAddress, dispensaryWebsite, phoneNumber, website;
-    int dispensaryRating;
+    int rating, homeRank;
     Drawable image, iconImage;
     List<Product> productList;
     double latitude, longitude;
+
+    public void setHomeRank(int homeRank) {
+        this.homeRank = homeRank;
+    }
+
+    public int getHomeRank() {
+        return homeRank;
+    }
 
     public Dispensary(){
         productList = new ArrayList<>();
@@ -102,10 +110,10 @@ public class Dispensary {
     }
 
     public void setDispensaryRating(int dispensaryRating) {
-        this.dispensaryRating = dispensaryRating;
+        this.rating = dispensaryRating;
     }
 
     public int getDispensaryRating() {
-        return dispensaryRating;
+        return rating;
     }
 }

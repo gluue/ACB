@@ -158,6 +158,10 @@ public class DispensaryDetailFragment extends Fragment implements OnMapReadyCall
         });
 
 
+        HistoryItem history = new HistoryItem();
+        history.setItemType("d");
+        history.setItemName(SuperVar.targetDispensary.getDispensaryName());
+
 
         return rootView;
     }

@@ -94,6 +94,10 @@ public class ProductDetailFragment extends Fragment {
         reviewList.setLayoutManager(new LinearLayoutManager(rootView.getContext()));
         reviewList.setAdapter(new ReviewListAdapter(rootView.getContext(), productReviewList, getFragmentManager()));
 
+        HistoryItem history = new HistoryItem();
+        history.setItemName(SuperVar.targetProduct.getProductName());
+        history.setItemType("p");
+
 
         return rootView;
     }

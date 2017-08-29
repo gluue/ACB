@@ -11,13 +11,20 @@ import java.util.List;
  */
 
 public class Product {
-    int rating;
+    int rating, homeRank;
     String productName, productType, dispensaryAddress, dispensaryName, productDescription;
     Drawable image, iconImage;
     List<Double> statList;
     Dispensary dispensary;
 
 
+    public void setHomeRank(int homeRank) {
+        this.homeRank = homeRank;
+    }
+
+    public int getHomeRank() {
+        return homeRank;
+    }
 
     public Product(){
         statList = new ArrayList<>();

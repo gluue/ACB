@@ -15,6 +15,7 @@ import java.util.List;
  */
 
 public class SuperVar extends Application {
+    static List<HistoryItem> historyList = new ArrayList<>();
     static User currentUser;
     static String productListType;
     static Product targetProduct;
@@ -29,4 +30,5 @@ public class SuperVar extends Application {
     static boolean requestMap = false;
     static List<Dispensary> dispensaryList = new ArrayList<>();
     static List<User> userList = new ArrayList<>();
+    static List<Product> productList = new ArrayList<>();
 }
